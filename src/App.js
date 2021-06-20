@@ -1,46 +1,25 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import dashboard from "./components/dashboard/dashboard";
+import React from "react";
 import Signup from "./components/signup/signup";
+import {Container,Row, Col,Alert} from "reactstrap";
+import "./assets/plugins/nucleo/css/nucleo.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./assets/css/argon-dashboard-react.css";
 
-import React from 'react'
-
-function Dashboard() {
-  return dashboard;
-}
-function Page0() {
-  return(
-    <div>
-      <Signup/>
-    </div>
-  )
-
-}
-function Page1() {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
-  )
-}
-
+import { AuthProvider } from "./components/contexts/AuthContext";
 
 function App() {
   return (
-    <Router>
-    <div className="App">
-      
-        <Route exact path="/">
-          <Page0 />
-        </Route>
-        <Route exact path="/dashboard">
-          <Dashboard />
-        </Route>
-        <Route exact path="/page1">
-          <Page1 />
-        </Route>
-    </div>
-    </Router>
+    <AuthProvider>
+      <Container
+        className="d-flex align-items-center justyfy-content-center"
+        style={{ minHeight: "100vh" }}
+      >
+        <div className="w-100" style={{ maxWidth: "400px" }}>
+          <Signup />
+        </div>
+      </Container>
+    </AuthProvider>
   );
 }
 
