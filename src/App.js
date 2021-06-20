@@ -9,7 +9,11 @@ function Dashboard() {
   return dashboard;
 }
 function Page0() {
-  return Signup()
+  return(
+    <div>
+      <Signup/>
+    </div>
+  )
 
 }
 function Page1() {
