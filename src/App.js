@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import dashboard from "./components/dashboard/dashboard";
-import signup from "./components/signup/signup";
+import Signup from "./components/signup/signup";
 
 import React from 'react'
 
@@ -9,7 +9,7 @@ function Dashboard() {
   return dashboard;
 }
 function Page0() {
-  return signup;
+  return Signup()
 
 }
 function Page1() {

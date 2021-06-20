@@ -1,7 +1,7 @@
 import React , { useRef } from 'react';
 import {Form, Card, Button, FormGroup} from 'react-bootstrap'
 
-export default function signup(){
+export default function Signup(){
     const emailRef= useRef()
     const passwordRef= useRef()
     const passwordConfirmRef= useRef()
