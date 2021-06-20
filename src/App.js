@@ -1,21 +1,16 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import dashboard from "./components/dashboard/dashboard";
+import signup from "./components/signup/signup";
 
 import React from 'react'
 
- function Dashboard() {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
-  )
+function Dashboard() {
+  return dashboard;
 }
 function Page0() {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
-  )
+  return signup;
+
 }
 function Page1() {
   return (
@@ -32,10 +27,10 @@ function App() {
     <div className="App">
       
         <Route exact path="/">
-          <Dashboard />
-        </Route>
-        <Route exact path="/page0">
           <Page0 />
+        </Route>
+        <Route exact path="/dashboard">
+          <Dashboard />
         </Route>
         <Route exact path="/page1">
           <Page1 />
