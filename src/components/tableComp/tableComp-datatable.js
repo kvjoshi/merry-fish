@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { storiesOf } from '@storybook/react';
+
 import data from '../../cons/tabledata';
 import DataTable from 'react-data-table-component';
 
@@ -145,5 +145,5 @@ const BasicTable = () => {
     );
 };
 
-storiesOf('Editable', module)
-    .add('Editable Row', BasicTable);
+/*storiesOf('Editable', module)
+    .add('Editable Row', BasicTable);*/
