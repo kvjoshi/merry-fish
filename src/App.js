@@ -8,6 +8,8 @@ import Login from "./components/login/Login"
 import PrivateRoute from "./routes/PrivateRoute"
 import ForgotPassword from "./components/forgotpassword/ForgotPassword"
 import UpdateProfile from "./components/updateprofile/UpdateProfile"
+import Prod_entry from "./components/prod_entry/prod_entry"
+import Prod_list from "./components/prod_list/prod_list"
 
 function App() {
     return (
@@ -21,6 +23,8 @@ function App() {
                         <Switch>
                             <PrivateRoute exact path="/" component={Dashboard} />
                             <PrivateRoute path="/update-profile" component={UpdateProfile} />
+                            <PrivateRoute path="/product" component={Prod_list} />
+
                             <Route path="/signup" component={Signup} />
                             <Route path="/login" component={Login} />
                             <Route path="/forgot-password" component={ForgotPassword} />

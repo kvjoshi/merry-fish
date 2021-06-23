@@ -2796,6 +2796,17 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
+"@react-firebase/firestore@^0.5.5":
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/@react-firebase/firestore/-/firestore-0.5.5.tgz#dc551c60d14815eb1b36e1d7c996e41404a13711"
+  integrity sha512-lItDakBRhEfstWbD27hHwNf84v5O6NLP2OzsB5n8kWhNIzPeAFj9mxB295L10vDyojGY83ULPp8wvuIlAm1P9w==
+  dependencies:
+    immer "^1.5.0"
+    lodash.get "^4.4.2"
+    lodash.set "^4.3.2"
+    react "15.x || 16.x"
+    render-and-add-props "^0.5.0"
+
 "@release-it/conventional-changelog@1.1.4":
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/@release-it/conventional-changelog/-/conventional-changelog-1.1.4.tgz#28ad5a49e096fec7d874f06041b5cc0ddffa7daa"
@@ -8435,6 +8446,11 @@ immer@8.0.1:
   resolved "https://registry.yarnpkg.com/immer/-/immer-8.0.1.tgz#9c73db683e2b3975c424fb0572af5889877ae656"
   integrity sha512-aqXhGP7//Gui2+UrEtvxZxSquQVXTpZ7KDxfCcKAF3Vysvw0CViVaW9RZ1j1xlIYqaaaipBoqdqeibkc18PNvA==
 
+immer@^1.5.0:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-1.12.1.tgz#40c6e5b292c00560836c2993bda3a24379d466f5"
+  integrity sha512-3fmKM6ovaqDt0CdC9daXpNi5x/YCYS3i4cwLdTVkhJdk5jrDXoPs7lCm3IqM3yhfSnz4tjjxbRG2CziQ7m8ztg==
+
 import-cwd@3.0.0, import-cwd@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/import-cwd/-/import-cwd-3.0.0.tgz#20845547718015126ea9b3676b7592fb8bd4cf92"
@@ -9973,6 +9989,11 @@ lodash.find@^4.6.0:
   resolved "https://registry.yarnpkg.com/lodash.find/-/lodash.find-4.6.0.tgz#cb0704d47ab71789ffa0de8b97dd926fb88b13b1"
   integrity sha1-ywcE1Hq3F4n/oN6Ll92Sb7iLE7E=
 
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
 lodash.ismatch@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.ismatch/-/lodash.ismatch-4.4.0.tgz#756cb5150ca3ba6f11085a78849645f188f85f37"
@@ -9992,6 +10013,11 @@ lodash.orderby@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.orderby/-/lodash.orderby-4.6.0.tgz#e697f04ce5d78522f54d9338b32b81a3393e4eb3"
   integrity sha1-5pfwTOXXhSL1TZM4syuBozk+TrM=
+
+lodash.set@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
+  integrity sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
@@ -12924,6 +12950,15 @@ react-transition-group@^4.4.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
+"react@15.x || 16.x":
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
@@ -13268,6 +13303,11 @@ remove-trailing-separator@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"
   integrity sha1-wkvOKig62tW8P1jg1IJJuSN52O8=
+
+render-and-add-props@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/render-and-add-props/-/render-and-add-props-0.5.0.tgz#79e35b2251936ec187188322826e56401c2ef70b"
+  integrity sha512-jIVQsWxGDHwpMcI0d9w6OxF/GCtwL02Lyqk8aGjyF6LyR9GPLY+1ONwPjs6kbQ2d6gTApWk8aprZkBli0tpG/w==
 
 renderkid@^2.0.4:
   version "2.0.5"
