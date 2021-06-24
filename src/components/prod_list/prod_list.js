@@ -5,6 +5,8 @@ import { Link, useHistory } from "react-router-dom"
 import firebase from "../../firebase";
 import Prod_entry from "../prod_entry/prod_entry";
 import TableCompReact from "../tableComp/tableComp-react";
+import EditingDemo from "../tableComp/table-ka"
+
 export default function Prod_list() {
     const [Product, setProduct] = React.useState([]);
     const [newProductName, setNewProductName] = React.useState();
@@ -26,6 +28,7 @@ export default function Prod_list() {
 
     return (
         <>
+            <div>
         <div className={'row'}>
         <div className={'col-md-5'}>
             <input value={newProductName} onChange={e => setNewProductName(e.target.value)} />
@@ -36,6 +39,9 @@ export default function Prod_list() {
                 {Product.map(Product => (
                     <li key={Product.name}>
                         <Prod_entry Product={Product} />
+                        <span>Product Price : {Product.price}</span>
+                        <span>Product Code : {Product.code}</span>
+
                     </li>
                 ))}
 
@@ -43,8 +49,12 @@ export default function Prod_list() {
         </div>
         </div>
         <div className={'row'}>
+            <EditingDemo></EditingDemo>
+        </div>
+        <div className={'row'}>
             <TableCompReact></TableCompReact>
         </div>
+            </div>
         </>
     );
 }

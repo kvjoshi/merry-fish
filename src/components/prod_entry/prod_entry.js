@@ -12,6 +12,7 @@ const Prod_entry = ({ Product })=>{
     const onDelete = () => {
         const db = firebase.firestore()
         db.collection('prod_list').doc(Product.id).delete()
+
     }
 
     return (

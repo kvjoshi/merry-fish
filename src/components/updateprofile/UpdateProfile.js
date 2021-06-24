@@ -43,6 +43,8 @@ export default function UpdateProfile() {
 
     return (
         <>
+            <div className={""}>
+            <div className={"row"}>
             <Card>
                 <Card.Body>
                     <h2 className="text-center mb-4">Update Profile</h2>
@@ -73,14 +75,16 @@ export default function UpdateProfile() {
                                 placeholder="Leave blank to keep the same"
                             />
                         </Form.Group>
-                        <Button disabled={loading} className="w-100" type="submit">
+                        <Button disabled={loading} className="w-100 mt-2" type="submit">
                             Update
                         </Button>
                     </Form>
                 </Card.Body>
             </Card>
+            </div>
             <div className="w-100 text-center mt-2">
                 <Link to="/">Cancel</Link>
+            </div>
             </div>
         </>
     )

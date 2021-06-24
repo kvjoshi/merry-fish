@@ -9765,6 +9765,11 @@ jsprim@^1.2.2:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
+ka-table@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/ka-table/-/ka-table-6.9.0.tgz#b6a0327c1a7f5d11b976dd7df1f4f0835a739235"
+  integrity sha512-msKqaiVPaTQOo+eB2aMDfuUCkpP3NAf8lphPM3LB5ymLcPN3G0fcTzIW+zK1t6apuHs0coOGATli+DpwkI2c2A==
+
 keyv@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-3.1.0.tgz#ecc228486f69991e49e9476485a5be1e8fc5c4d9"
