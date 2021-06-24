@@ -2,7 +2,7 @@ import React ,{useState} from 'react';
 import firebase from 'firebase';
 const Prod_entry = ({ Product })=>{
 
-    const [name, setName] = React.useState(Product.name);
+    const [name, setName] = useState(Product.name);
 
     const onUpdate = () => {
         const db = firebase.firestore()

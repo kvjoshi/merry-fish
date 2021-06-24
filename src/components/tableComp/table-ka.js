@@ -23,10 +23,10 @@ const dataArray = [
 ];
 
 export function GetData() {
-    const [Product, setProduct] = React.useState([]);
-    const [newProductName, setNewProductName] = React.useState();
+    const [Product, setProduct] = useState([]);
+    const [newProductName, setNewProductName] = useState();
 
-    React.useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
             const db = firebase.firestore();
             const data = await db.collection("prod_list").get();

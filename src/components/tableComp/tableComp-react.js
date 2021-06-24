@@ -2,7 +2,11 @@ import React ,{ useMemo } from 'react';
 import { useTable} from "react-table";
 
 
+
 function TableCompReact(props) {
+
+
+
 
     const data = useMemo(
         () => [
@@ -40,15 +44,19 @@ function TableCompReact(props) {
                 col2: 'you want',
             },
         ],    []);
-    const columns = React.useMemo(
+    const columns = useMemo(
         () => [
             {
-                Header: 'Column 1',
+                Header: 'Name',
                 accessor: 'col1', // accessor is the "key" in the data
             },
             {
-                Header: 'Column 2',
+                Header: 'Price',
                 accessor: 'col2',
+            },
+            {
+                Header: 'Code',
+                accessor: 'col3',
             },
         ],
         [])
@@ -65,6 +73,7 @@ function TableCompReact(props) {
 
     return (
         <>
+
             <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
                 <thead>
                 {headerGroups.map(headerGroup => (

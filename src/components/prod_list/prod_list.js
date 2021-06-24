@@ -8,10 +8,10 @@ import TableCompReact from "../tableComp/tableComp-react";
 import EditingDemo from "../tableComp/table-ka"
 
 export default function Prod_list() {
-    const [Product, setProduct] = React.useState([]);
-    const [newProductName, setNewProductName] = React.useState();
+    const [Product, setProduct] = useState([]);
+    const [newProductName, setNewProductName] = useState();
 
-    React.useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
             const db = firebase.firestore();
             const data = await db.collection("prod_list").get();
@@ -49,10 +49,10 @@ export default function Prod_list() {
         </div>
         </div>
         <div className={'row'}>
-            <EditingDemo></EditingDemo>
+            <EditingDemo />
         </div>
         <div className={'row'}>
-            <TableCompReact></TableCompReact>
+            <TableCompReact props={Product} />
         </div>
             </div>
         </>
