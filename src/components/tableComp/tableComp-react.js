@@ -1,49 +1,28 @@
-import React ,{ useMemo } from 'react';
+import React ,{ useMemo ,useEffect} from 'react';
 import { useTable} from "react-table";
-
-
-
-function TableCompReact(props) {
+import {useCollectionOnce} from "react-firebase-hooks/firestore";
+import firebase from "../../firebase";
 
 
 
 
-    const data = useMemo(
-        () => [
-            {
-                col1: 'Hello',
-                col2: 'World',
-            },
-            {
-                col1: 'react-table',
-                col2: 'rocks',
-            },
-            {
-                col1: 'whatever',
-                col2: 'you want',
-            },{
-                col1: 'whatever',
-                col2: 'you want',
-            },{
-                col1: 'whatever',
-                col2: 'you want',
-            },{
-                col1: 'whatever',
-                col2: 'you want',
-            },{
-                col1: 'whatever',
-                col2: 'you want',
-            },{
-                col1: 'whatever',
-                col2: 'you want',
-            },{
-                col1: 'whatever',
-                col2: 'you want',
-            },{
-                col1: 'whatever',
-                col2: 'you want',
-            },
-        ],    []);
+export default function TableCompReact(props) {
+
+
+       /* const [value, loading, error] = useCollectionOnce(
+        firebase.firestore().collection('prod_list'),
+        {
+            snapshotListenOptions: { includeMetadataChanges: true },
+        }
+    );
+
+
+    if(loading === 'false'){
+        data = value.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+    }
+
+   console.log(loading);*/
+    let data=[];
     const columns = useMemo(
         () => [
             {
@@ -122,7 +101,7 @@ function TableCompReact(props) {
     );
 }
 
-export default TableCompReact;
+
 
 
 

@@ -6,10 +6,18 @@ import firebase from "../../firebase";
 import Prod_entry from "../prod_entry/prod_entry";
 import TableCompReact from "../tableComp/tableComp-react";
 import EditingDemo from "../tableComp/table-ka"
+import {useCollection} from "react-firebase-hooks/firestore";
 
 export default function Prod_list() {
     const [Product, setProduct] = useState([]);
     const [newProductName, setNewProductName] = useState();
+    const [value, loading, error] = useCollection(
+        firebase.firestore().collection('prod_list'),
+        {
+            snapshotListenOptions: { includeMetadataChanges: true },
+        }
+    );
+    // console.log(value.docs.map(doc => ({ ...doc.data(), id: doc.id })));
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,6 +37,19 @@ export default function Prod_list() {
     return (
         <>
             <div>
+                <div className={'row'}>
+                    <p>
+                        {value && (
+                            <span>
+                                {value.docs.map((doc) => (
+                                    <React.Fragment key={doc.id}>
+                                        {JSON.stringify(doc.data())},{' '}
+                                    </React.Fragment>
+                                ))}
+                            </span>
+                        )}
+                    </p>
+                </div>
         <div className={'row'}>
         <div className={'col-md-5'}>
             <input value={newProductName} onChange={e => setNewProductName(e.target.value)} />
@@ -37,7 +58,7 @@ export default function Prod_list() {
         <div className={'col-md-7'}>
             <ul className={'w-100'}>
                 {Product.map(Product => (
-                    <li key={Product.name}>
+                    <li key={Product.id}>
                         <Prod_entry Product={Product} />
                         <span>Product Price : {Product.price}</span>
                         <span>Product Code : {Product.code}</span>
@@ -49,10 +70,10 @@ export default function Prod_list() {
         </div>
         </div>
         <div className={'row'}>
-            <EditingDemo />
+            <EditingDemo props={loading}/>
         </div>
         <div className={'row'}>
-            <TableCompReact props={Product} />
+            <TableCompReact props={value} />
         </div>
             </div>
         </>
