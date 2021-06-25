@@ -1,24 +1,26 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 
-import data from '../../cons/tabledata';
+
 import DataTable from 'react-data-table-component';
+import firebase from "../../firebase";
+
 
 const columns = [
     {
         name: 'Title',
-        selector: 'title',
+        selector: 'name',
         sortable: true,
         editable: true,
     },
     {
         name: 'Director',
-        selector: 'director',
+        selector: 'price',
         sortable: true,
         editable: true,
     },
     {
         name: 'Year',
-        selector: 'year',
+        selector: 'id',
         sortable: true,
     },
 ];
@@ -49,7 +51,10 @@ const EditableCell = ({ row, index, column, col, onChange }) => {
     return row[column.selector];
 };
 
-const BasicTable = () => {
+export default function BasicTable(Product) {
+    console.log(Product.Product)
+    let data=Product.Product;
+
     const [innerData, setInnerData] = useState(data);
     const [editingId, setEditingId] = useState('');
     let formData = useRef({}).current;
@@ -144,6 +149,3 @@ const BasicTable = () => {
         />
     );
 };
-
-/*storiesOf('Editable', module)
-    .add('Editable Row', BasicTable);*/

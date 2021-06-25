@@ -14,34 +14,35 @@ import { DispatchFunc } from 'ka-table/types';
 import firebase from "../../firebase";
 import {useCollection, useCollectionOnce} from "react-firebase-hooks/firestore";
 
-function EditingDemo(props) {
-    const [value, loading, error] = useCollectionOnce(
-        firebase.firestore().collection('prod_list'),
-        {
-            snapshotListenOptions: { includeMetadataChanges: true },
-        }
-    );
+function EditingDemo() {
+
+    const [Product, setProduct] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const db = firebase.firestore();
+            const data = await db.collection("prod_list").get();
+            setProduct(data.docs.map(doc => ({ ...doc.data()})));
+        };
+        fetchData();
+    }, []);
 
 
     // if (dataArray===[] && loading === 'false'){
     //
     //     dataArray = value.docs.map(doc => ({ ...doc.data(), id: doc.id }));
     // }
-    let dataArray = [];
+    let dataArray = Product;
+    // dataArray=Product.docs.map(doc => ({ ...doc.data(), id: doc.id }));
 
-    // console.log(props.value.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+     // console.log(props.Product.value.docs.map(doc => ({ ...doc.data(), id: doc.id })));
 
 
     const tablePropsInit = {
         columns: [
             {key: 'name', title: 'Name', dataType: DataType.String, style: {width: '30%'}},
-            {key: 'score', title: 'Score', dataType: DataType.Number, style: {width: '40px'}},
-            {key: 'passed', title: 'Passed', dataType: DataType.Boolean, style: {width: '10%'}},
-            {
-                dataType: DataType.Date,
-                key: 'nextTry',
-                title: 'Next Try',
-            },
+            {key: 'id', title: 'Score', dataType: DataType.Number, style: {width: '40px'}},
+            {key: 'price', title: 'Passed', dataType: DataType.Boolean, style: {width: '10%'}},
+
         ],
         format: ({column, value}) => {
             if (column.dataType === DataType.Date) {
@@ -63,19 +64,6 @@ function EditingDemo(props) {
         changeTableProps((prevState) => kaReducer(prevState, action));
     };
 
-    function Isloaded(loading) {
-        const isloading = loading;
-        if (isloading) {
-
-            return (
-                <>
-                    <div>Loading</div>
-                </>
-            )
-        }
-        else {
-            // dataArray = value.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-            console.log(loading);
             return (
                 <Table
                     {...tableProps}
@@ -83,11 +71,6 @@ function EditingDemo(props) {
                 />
 
             )
-        }
-    }
-    return(
-        <Isloaded isloading={loading}/>
-    )
 }
 
 export default EditingDemo;

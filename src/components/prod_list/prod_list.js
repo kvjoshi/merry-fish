@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom"
 import firebase from "../../firebase";
 import Prod_entry from "../prod_entry/prod_entry";
 import TableCompReact from "../tableComp/tableComp-react";
+import BasicTable from '../tableComp/tableComp-datatable'
 import EditingDemo from "../tableComp/table-ka"
 import {useCollection} from "react-firebase-hooks/firestore";
 
@@ -17,7 +18,10 @@ export default function Prod_list() {
             snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
+    const[Val1,setVal1] = useState([]);
     // console.log(value.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,6 +31,7 @@ export default function Prod_list() {
         };
         fetchData();
     }, []);
+
 
     const onCreate = () => {
         const db = firebase.firestore();
@@ -39,7 +44,7 @@ export default function Prod_list() {
             <div>
                 <div className={'row'}>
                     <p>
-                        {value && (
+                        {/*{value && (
                             <span>
                                 {value.docs.map((doc) => (
                                     <React.Fragment key={doc.id}>
@@ -47,34 +52,37 @@ export default function Prod_list() {
                                     </React.Fragment>
                                 ))}
                             </span>
-                        )}
+                        )}*/}
                     </p>
                 </div>
-        <div className={'row'}>
-        <div className={'col-md-5'}>
-            <input value={newProductName} onChange={e => setNewProductName(e.target.value)} />
-            <button onClick={onCreate}>Create</button>
-        </div>
-        <div className={'col-md-7'}>
-            <ul className={'w-100'}>
-                {Product.map(Product => (
-                    <li key={Product.id}>
-                        <Prod_entry Product={Product} />
-                        <span>Product Price : {Product.price}</span>
-                        <span>Product Code : {Product.code}</span>
+                <div className={'row'}>
+                    <div className={'col-md-5'}>
+                        <input value={newProductName} onChange={e => setNewProductName(e.target.value)} />
+                        <button onClick={onCreate}>Create</button>
+                    </div>
+                    <div className={'col-md-7'}>
+                        <ul className={'w-100'}>
+                            {Product.map(Product => (
+                                <li key={Product.id}>
+                                    <Prod_entry Product={Product} />
+                                    <span>Product Price : {Product.price}</span>
+                                    <span>Product Code : {Product.code}</span>
 
-                    </li>
-                ))}
+                                </li>
+                            ))}
 
-            </ul>
-        </div>
-        </div>
-        <div className={'row'}>
-            <EditingDemo props={loading}/>
-        </div>
-        <div className={'row'}>
-            <TableCompReact props={value} />
-        </div>
+                        </ul>
+                    </div>
+                </div>
+                <div className={'row'}>
+                    <EditingDemo Product={Product}/>
+                </div>
+                <div className={'row'}>
+                    <TableCompReact Product={Product} />
+                </div>
+                <div className={'row'}>
+                    <BasicTable Product={Product} />
+                </div>
             </div>
         </>
     );
