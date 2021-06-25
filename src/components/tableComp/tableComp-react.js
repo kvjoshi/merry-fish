@@ -23,7 +23,9 @@ export default function TableCompReact(Product) {
 
    console.log(loading);*/
 
+
     let data=Product.Product;
+
     // console.log(Product.Product)
     const columns = useMemo(
         () => [

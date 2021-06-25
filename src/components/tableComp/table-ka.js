@@ -16,22 +16,24 @@ import {useCollection, useCollectionOnce} from "react-firebase-hooks/firestore";
 
 function EditingDemo() {
 
+    const [dataArray, setdataArray] = useState([]);
     const [Product, setProduct] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             const db = firebase.firestore();
             const data = await db.collection("prod_list").get();
             setProduct(data.docs.map(doc => ({ ...doc.data()})));
+            setdataArray(data.docs.map(doc => ({ ...doc.data()})));
         };
         fetchData();
-    }, []);
+    }, [dataArray]);
 
 
     // if (dataArray===[] && loading === 'false'){
     //
     //     dataArray = value.docs.map(doc => ({ ...doc.data(), id: doc.id }));
     // }
-    let dataArray = Product;
+
     // dataArray=Product.docs.map(doc => ({ ...doc.data(), id: doc.id }));
 
      // console.log(props.Product.value.docs.map(doc => ({ ...doc.data(), id: doc.id })));
@@ -40,8 +42,8 @@ function EditingDemo() {
     const tablePropsInit = {
         columns: [
             {key: 'name', title: 'Name', dataType: DataType.String, style: {width: '30%'}},
-            {key: 'id', title: 'Score', dataType: DataType.Number, style: {width: '40px'}},
-            {key: 'price', title: 'Passed', dataType: DataType.Boolean, style: {width: '10%'}},
+            {key: 'code', title: 'Code', dataType: DataType.Number, style: {width: '40px'}},
+            {key: 'price', title: 'Price', dataType: DataType.Boolean, style: {width: '10%'}},
 
         ],
         format: ({column, value}) => {

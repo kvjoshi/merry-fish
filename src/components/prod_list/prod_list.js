@@ -65,8 +65,7 @@ export default function Prod_list() {
                             {Product.map(Product => (
                                 <li key={Product.id}>
                                     <Prod_entry Product={Product} />
-                                    <span>Product Price : {Product.price}</span>
-                                    <span>Product Code : {Product.code}</span>
+
 
                                 </li>
                             ))}
@@ -78,7 +77,7 @@ export default function Prod_list() {
                     <EditingDemo Product={Product}/>
                 </div>
                 <div className={'row'}>
-                    <TableCompReact Product={Product} />
+                    <TableCompReact  Product={Product}/>
                 </div>
                 <div className={'row'}>
                     <BasicTable Product={Product} />

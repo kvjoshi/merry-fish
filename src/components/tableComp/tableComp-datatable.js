@@ -51,11 +51,23 @@ const EditableCell = ({ row, index, column, col, onChange }) => {
     return row[column.selector];
 };
 
-export default function BasicTable(Product) {
-    console.log(Product.Product)
-    let data=Product.Product;
+export default function BasicTable() {
 
-    const [innerData, setInnerData] = useState(data);
+    const [Product, setProduct] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const db = firebase.firestore();
+            const data = await db.collection("prod_list").get();
+            setProduct(data.docs.map(doc => ({ ...doc.data()})));
+            console.log(Product)
+        };
+        fetchData();
+    }, []);
+
+
+    let data1=Product;
+
+    const [innerData, setInnerData] = useState(data1);
     const [editingId, setEditingId] = useState('');
     let formData = useRef({}).current;
     const isEditing = record => record.id === editingId;

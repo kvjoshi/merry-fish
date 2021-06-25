@@ -17,6 +17,9 @@ const Prod_entry = ({ Product })=>{
 
     return (
         <>
+
+            <span className={'p-2'}>Product Price : {Product.price}</span>
+            <span className={'p-2'}>Product Code : {Product.code}</span>
             <input
                 value={name}
                 onChange={e => {
