@@ -30,7 +30,7 @@ export default function Prod_list() {
             setProduct(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         };
         fetchData();
-    }, []);
+    }, [Product]);
 
 
     const onCreate = () => {
