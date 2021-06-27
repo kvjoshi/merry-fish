@@ -3,7 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import firebase from "../../firebase";
-import Prod_entry from "../prod_entry/prod_entry";
+import Prod_update from "../prod_update/prod_update";
 import TableCompReact from "../tableComp/tableComp-react";
 import BasicTable from '../tableComp/tableComp-datatable'
 import EditingDemo from "../tableComp/table-ka"
@@ -12,17 +12,23 @@ import {useCollection} from "react-firebase-hooks/firestore";
 export default function Prod_list() {
     const [Product, setProduct] = useState([]);
     const [newProductName, setNewProductName] = useState();
+    const [newProductPrice, setNewProductPrice] = useState();
+    const [newProductCode, setNewProductCode] = useState();
+
+
+    //this is react-firebase-hook works but have to async it somehow
     const [value, loading, error] = useCollection(
         firebase.firestore().collection('prod_list'),
         {
             snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
+
     const[Val1,setVal1] = useState([]);
     // console.log(value.docs.map(doc => ({ ...doc.data(), id: doc.id })));
 
 
-
+    // this is custom firebase get data it works
     useEffect(() => {
         const fetchData = async () => {
             const db = firebase.firestore();
@@ -35,7 +41,9 @@ export default function Prod_list() {
 
     const onCreate = () => {
         const db = firebase.firestore();
-        db.collection("prod_list").add({ name: newProductName });
+        db.collection("prod_list").add({ name: newProductName , price: newProductPrice ,code: newProductCode  });
+        // db.collection("prod_list").add({ price: newProductPrice });
+
 
     };
 
@@ -55,31 +63,35 @@ export default function Prod_list() {
                         )}*/}
                     </p>
                 </div>
-                <div className={'row'}>
-                    <div className={'col-md-5'}>
-                        <input value={newProductName} onChange={e => setNewProductName(e.target.value)} />
-                        <button onClick={onCreate}>Create</button>
+
+                    {/*Create New Product Code Here*/}
+                    <div className={'row p-5 mb-2'}>
+                        <input className={'form-control mt-2'} value={newProductCode} onChange={e => setNewProductCode(e.target.value)} placeholder={'New Product Code'}/>
+                        <input className={'form-control mt-2'} value={newProductName} onChange={e => setNewProductName(e.target.value)}  placeholder={'New Product Name'}/>
+                        <input className={'form-control mt-2'} value={newProductPrice} onChange={e => setNewProductPrice(e.target.value)}  placeholder={'New Product Price'}/>
+                        <button className={'btn btn-primary mt-2'} onClick={onCreate}>Create</button>
                     </div>
-                    <div className={'col-md-7'}>
+                    {/*Below Code To Update product*/}
+                    <div className={'row'}>
                         <ul className={'w-100'}>
                             {Product.map(Product => (
                                 <li key={Product.id}>
-                                    <Prod_entry Product={Product} />
-
-
+                                    <Prod_update Product={Product} />
                                 </li>
                             ))}
-
                         </ul>
                     </div>
-                </div>
-                <div className={'row'}>
+
+                <div className={'row p-2'}>
+                    <span>Ka-Table blank array</span>
                     <EditingDemo Product={Product}/>
                 </div>
-                <div className={'row'}>
+                <div className={'row p-2'}>
+                    <span>react-table blank array</span>
                     <TableCompReact  Product={Product}/>
                 </div>
-                <div className={'row'}>
+                <div className={'row p-2'}>
+                    <span>react-data-table blank array</span>
                     <BasicTable Product={Product} />
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React, {useMemo, useEffect, useState} from 'react';
-import { useTable} from "react-table";
+import { useTable } from "react-table";
 import {useCollectionOnce} from "react-firebase-hooks/firestore";
 import firebase from "../../firebase";
 
@@ -23,8 +23,8 @@ export default function TableCompReact(Product) {
 
    console.log(loading);*/
 
-
-    let data=Product.Product;
+    let data = [];
+     // data=JSON.stringify(Product.Product);
 
     // console.log(Product.Product)
     const columns = useMemo(

@@ -8,7 +8,7 @@ import Login from "./components/login/Login"
 import PrivateRoute from "./routes/PrivateRoute"
 import ForgotPassword from "./components/forgotpassword/ForgotPassword"
 import UpdateProfile from "./components/updateprofile/UpdateProfile"
-import Prod_entry from "./components/prod_entry/prod_entry"
+import Prod_update from "./components/prod_update/prod_update"
 import Prod_list from "./components/prod_list/prod_list"
 
 function App() {
