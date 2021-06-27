@@ -28,6 +28,8 @@ export default function Dashboard() {
                     <h2 className="text-center mb-4">Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <strong>Email:</strong> {currentUser.email}
+                    <br/>
+                    <strong>UUID:</strong> {currentUser.uid}
                     <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
                         Update Profile
                     </Link>
@@ -35,6 +37,10 @@ export default function Dashboard() {
 
                     <Link to="/product" className="btn btn-primary w-100 mt-3">
                         Insert Product
+                    </Link>
+
+                    <Link to="/place_order" className="btn btn-primary w-100 mt-3">
+                        Place Order
                     </Link>
                 </Card.Body>
             </Card>

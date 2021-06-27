@@ -10,6 +10,8 @@ import EditingDemo from "../tableComp/table-ka"
 import {useCollection} from "react-firebase-hooks/firestore";
 
 export default function Prod_list() {
+    const { currentUser, logout } = useAuth()
+
     const [Product, setProduct] = useState([]);
     const [newProductName, setNewProductName] = useState();
     const [newProductPrice, setNewProductPrice] = useState();
@@ -17,14 +19,13 @@ export default function Prod_list() {
 
 
     //this is react-firebase-hook works but have to async it somehow
-    const [value, loading, error] = useCollection(
+    /* const [value, loading, error] = useCollection(
         firebase.firestore().collection('prod_list'),
         {
             snapshotListenOptions: { includeMetadataChanges: true },
         }
-    );
+    ); */
 
-    const[Val1,setVal1] = useState([]);
     // console.log(value.docs.map(doc => ({ ...doc.data(), id: doc.id })));
 
 
@@ -43,8 +44,6 @@ export default function Prod_list() {
         const db = firebase.firestore();
         db.collection("prod_list").add({ name: newProductName , price: newProductPrice ,code: newProductCode  });
         // db.collection("prod_list").add({ price: newProductPrice });
-
-
     };
 
     return (
@@ -52,6 +51,7 @@ export default function Prod_list() {
             <div>
                 <div className={'row'}>
                     <p>
+                        <strong>UUID: {currentUser.uid} </strong>
                         {/*{value && (
                             <span>
                                 {value.docs.map((doc) => (

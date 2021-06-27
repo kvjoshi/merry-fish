@@ -10,6 +10,7 @@ import ForgotPassword from "./components/forgotpassword/ForgotPassword"
 import UpdateProfile from "./components/updateprofile/UpdateProfile"
 import Prod_update from "./components/prod_update/prod_update"
 import Prod_list from "./components/prod_list/prod_list"
+import PlaceOrder from "./components/place_order/place_order";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                             <PrivateRoute exact path="/" component={Dashboard} />
                             <PrivateRoute path="/update-profile" component={UpdateProfile} />
                             <PrivateRoute path="/product" component={Prod_list} />
+                            <PrivateRoute path="/place_order" component={PlaceOrder} />
 
                             <Route path="/signup" component={Signup} />
                             <Route path="/login" component={Login} />
