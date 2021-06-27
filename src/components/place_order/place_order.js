@@ -1,8 +1,9 @@
 import React, { useState , useEffect } from 'react';
 import { useAuth } from "../../contexts/AuthContext"
 import firebase from "../../firebase";
-import Prod_update from "../prod_update/prod_update";
+
 import {useCollectionDataOnce} from "react-firebase-hooks/firestore";
+
 
 
 
@@ -15,22 +16,27 @@ function PlaceOrder(props) {
         {
             snapshotListenOptions: { includeMetadataChanges: true },
         });
-    const [user_oid, set_user_oid] = useState();
+    const [prod, prod_loading, prod_error] = useCollectionDataOnce(firebase.firestore().collection('prod_list'),
+        {
+            snapshotListenOptions: { includeMetadataChanges: true },
+        });
+    const [user_oid, set_user_oid] = useState('not_set');
 
     const [price, setPrice] = useState();
     const [code, setCode] = useState();
     const [qty, setQty] = useState();
 
+    let read_count = 0;
 
-
-    useEffect(() => {
+    /*useEffect(() => {
         const fetchData = async () => {
             const db = firebase.firestore();
             const data = await db.collection("prod_list").get();
             setProduct(data.docs.map(doc => ({...doc.data(), id: doc.id})));
+
         };
         fetchData();
-    }, [Product]);
+    }, [Product]);*/
 
 
 
@@ -39,20 +45,31 @@ function PlaceOrder(props) {
             set_user_oid(user[0]['current_order_id']);
             console.log('haliu');
             console.log(user);
+            console.log(prod)
+
         };
 
-    }, [u_loading]);
+    }, [prod]);
 
 
 
 
 
-    const onCreate = () => {
+    async function onAddToCart() {
         console.log([price, code ,uid , qty]);
         let order_total = price * qty;
-        let order_array = ['price: '+price,'code: '+code ,'qty: '+qty ,'order_total: '+order_total];
-        const db = firebase.firestore();
-        db.collection("order").update({order_array: order_array});
+        // cannot do array in array
+        // let order_array = ['price: '+price,'code: '+code ,'qty: '+qty ,'order_total: '+order_total];
+        // let o_price = [price];
+        // let o_code = [price];
+        // let o_qty = [qty];
+        // let o_order_total = [order_total];
+        // no need to make it value array , string can be also added
+        // const admin = require('firebase-admin');
+        let o_id = user_oid.toString();
+        const db =  firebase.firestore().collection("order").doc(o_id);
+
+       const update_query = await db.update({price: firebase.firestore.FieldValue.arrayUnion(price),code: firebase.firestore.FieldValue.arrayUnion(code),qty:firebase.firestore.FieldValue.arrayUnion(qty),order_total:firebase.firestore.FieldValue.arrayUnion(order_total)});
 
     }
 
@@ -66,19 +83,16 @@ function PlaceOrder(props) {
 
             <div>
                 <ul className={'w-100'}>
-                    {Product.map(Product => (
-                        <li key={Product.id} className={'mt-2'}>
+                    {prod && prod.map(prod => (
+                        <li key={prod.code} className={'mt-2'}>
 
-                            <span className={'col-4 p-2'}>Code: {Product.code}</span>
-                            <span className={'col-4 p-2'}>Name: {Product.name}</span>
-                            <span className={'col-4 p-2'}>Price: {Product.price}</span>
+                            <span className={'col-4 p-2'}>Code: {prod.code}</span>
+                            <span className={'col-4 p-2'}>Name: {prod.name}</span>
+                            <span className={'col-4 p-2'}>Price: {prod.price}</span>
                             <div className={'row'}>
-                               {/* <input type={'hidden'} value={Product.code}
-                                       onChange={e => { setCode(e.target.value); }}/>
-                                <input type={'hidden'} value={Product.price}
-                                       onChange={e => { setPrice(e.target.value); }}/> */}
-                            <input className={'col-8 mr-2'} type={'number'} onChange={e => { setQty(e.target.value); setCode(Product.code); setPrice(Product.price); }}/>
-                            <button className={'col-3 btn btn-primary'} onClick={onCreate}>Place Order</button>
+
+                            <input className={'col-8 mr-2'} type={'number'} onChange={e => { setQty(e.target.value); setCode(prod.code); setPrice(prod.price); }}/>
+                            <button className={'col-3 btn btn-primary'} onClick={onAddToCart}>Place Order</button>
                             </div>
                         </li>
                     ))}

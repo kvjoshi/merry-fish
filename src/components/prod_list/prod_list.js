@@ -7,37 +7,37 @@ import Prod_update from "../prod_update/prod_update";
 import TableCompReact from "../tableComp/tableComp-react";
 import BasicTable from '../tableComp/tableComp-datatable'
 import EditingDemo from "../tableComp/table-ka"
-import {useCollection} from "react-firebase-hooks/firestore";
+import {useCollectionDataOnce} from "react-firebase-hooks/firestore";
 
 export default function Prod_list() {
     const { currentUser, logout } = useAuth()
 
-    const [Product, setProduct] = useState([]);
+    // const [Product, setProduct] = useState([]);
     const [newProductName, setNewProductName] = useState();
     const [newProductPrice, setNewProductPrice] = useState();
     const [newProductCode, setNewProductCode] = useState();
 
 
     //this is react-firebase-hook works but have to async it somehow
-    /* const [value, loading, error] = useCollection(
+     const [Product, prod_loading, prod_error] = useCollectionDataOnce(
         firebase.firestore().collection('prod_list'),
         {
             snapshotListenOptions: { includeMetadataChanges: true },
         }
-    ); */
+    );
 
     // console.log(value.docs.map(doc => ({ ...doc.data(), id: doc.id })));
 
 
     // this is custom firebase get data it works
-    useEffect(() => {
+   /* useEffect(() => {
         const fetchData = async () => {
             const db = firebase.firestore();
             const data = await db.collection("prod_list").get();
             setProduct(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         };
         fetchData();
-    }, [Product]);
+    }, [Product]);*/
 
 
     const onCreate = () => {
@@ -52,15 +52,7 @@ export default function Prod_list() {
                 <div className={'row'}>
                     <p>
                         <strong>UUID: {currentUser.uid} </strong>
-                        {/*{value && (
-                            <span>
-                                {value.docs.map((doc) => (
-                                    <React.Fragment key={doc.id}>
-                                        {JSON.stringify(doc.data())},{' '}
-                                    </React.Fragment>
-                                ))}
-                            </span>
-                        )}*/}
+
                     </p>
                 </div>
 
@@ -74,8 +66,8 @@ export default function Prod_list() {
                     {/*Below Code To Update product*/}
                     <div className={'row'}>
                         <ul className={'w-100'}>
-                            {Product.map(Product => (
-                                <li key={Product.id}>
+                            {Product && Product.map(Product => (
+                                <li key={Product.code}>
                                     <Prod_update Product={Product} />
                                 </li>
                             ))}
