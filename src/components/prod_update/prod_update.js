@@ -2,9 +2,9 @@ import React ,{useState} from 'react';
 import firebase from 'firebase';
 const Prod_update = ({ Product })=>{
 
-    const [name, setName] = useState(Product.name);
-    const [price, setPrice] = useState(Product.price);
-    const [code, setCode] = useState(Product.code);
+    const [name, setName] = useState(Product.data().name);
+    const [price, setPrice] = useState(Product.data().price);
+    const [code, setCode] = useState(Product.data().code);
 
     const onUpdate = () => {
         const db = firebase.firestore()
@@ -16,7 +16,6 @@ const Prod_update = ({ Product })=>{
     const onDelete = () => {
         const db = firebase.firestore()
         db.collection('prod_list').doc(Product.id).delete()
-
     }
 
     return (

@@ -14,36 +14,21 @@ import { DispatchFunc } from 'ka-table/types';
 import firebase from "../../firebase";
 import {useCollection, useCollectionOnce} from "react-firebase-hooks/firestore";
 
-function EditingDemo() {
-
-    const [dataArray, setdataArray] = useState([]);
-    const [Product, setProduct] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            const db = firebase.firestore();
-            const data = await db.collection("prod_list").get();
-            setProduct(data.docs.map(doc => ({ ...doc.data()})));
-            setdataArray(data.docs.map(doc => ({ ...doc.data()})));
-        };
-        fetchData();
-    }, [dataArray]);
+function EditingDemo(Product) {
 
 
-    // if (dataArray===[] && loading === 'false'){
-    //
-    //     dataArray = value.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-    // }
 
-    // dataArray=Product.docs.map(doc => ({ ...doc.data(), id: doc.id }));
 
-     // console.log(props.Product.value.docs.map(doc => ({ ...doc.data(), id: doc.id })));
 
+
+   let dataArray = Product.Product.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+   console.log(dataArray);
 
     const tablePropsInit = {
         columns: [
             {key: 'name', title: 'Name', dataType: DataType.String, style: {width: '30%'}},
-            {key: 'code', title: 'Code', dataType: DataType.Number, style: {width: '40px'}},
-            {key: 'price', title: 'Price', dataType: DataType.Boolean, style: {width: '10%'}},
+            {key: 'code', title: 'Code', dataType: DataType.String, style: {width: '40px'}},
+            {key: 'price', title: 'Price', dataType: DataType.String, style: {width: '10%'}},
 
         ],
         format: ({column, value}) => {

@@ -2,12 +2,12 @@ import React, { useRef, useState, useEffect } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-import firebase from "../../firebase";
+import firebase from "firebase/app";
 import Prod_update from "../prod_update/prod_update";
 import TableCompReact from "../tableComp/tableComp-react";
 import BasicTable from '../tableComp/tableComp-datatable'
 import EditingDemo from "../tableComp/table-ka"
-import {useCollectionDataOnce} from "react-firebase-hooks/firestore";
+import {useCollectionOnce} from "react-firebase-hooks/firestore";
 
 export default function Prod_list() {
     const { currentUser, logout } = useAuth()
@@ -19,7 +19,7 @@ export default function Prod_list() {
 
 
     //this is react-firebase-hook works but have to async it somehow
-     const [Product, prod_loading, prod_error] = useCollectionDataOnce(
+     const [Product, prod_loading, prod_error] = useCollectionOnce(
         firebase.firestore().collection('prod_list'),
         {
             snapshotListenOptions: { includeMetadataChanges: true },
@@ -39,6 +39,9 @@ export default function Prod_list() {
         fetchData();
     }, [Product]);*/
 
+    useEffect(() => {
+        console.log('0');
+    }, [Product]);
 
     const onCreate = () => {
         const db = firebase.firestore();
@@ -52,7 +55,6 @@ export default function Prod_list() {
                 <div className={'row'}>
                     <p>
                         <strong>UUID: {currentUser.uid} </strong>
-
                     </p>
                 </div>
 
@@ -66,8 +68,8 @@ export default function Prod_list() {
                     {/*Below Code To Update product*/}
                     <div className={'row'}>
                         <ul className={'w-100'}>
-                            {Product && Product.map(Product => (
-                                <li key={Product.code}>
+                            {Product && Product.docs.map(Product => (
+                                <li key={Product.id}>
                                     <Prod_update Product={Product} />
                                 </li>
                             ))}
@@ -76,11 +78,13 @@ export default function Prod_list() {
 
                 <div className={'row p-2'}>
                     <span>Ka-Table blank array</span>
-                    <EditingDemo Product={Product}/>
+                    {Product &&  <EditingDemo Product={Product}/> }
                 </div>
                 <div className={'row p-2'}>
                     <span>react-table blank array</span>
+
                     <TableCompReact  Product={Product}/>
+
                 </div>
                 <div className={'row p-2'}>
                     <span>react-data-table blank array</span>

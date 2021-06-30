@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from 'react';
 import { useAuth } from "../../contexts/AuthContext"
-import firebase from "../../firebase";
+import firebase from "firebase/app"
 
 import {useCollectionDataOnce} from "react-firebase-hooks/firestore";
 
@@ -68,6 +68,7 @@ function PlaceOrder(props) {
         // const admin = require('firebase-admin');
         let o_id = user_oid.toString();
         const db =  firebase.firestore().collection("order").doc(o_id);
+        // const u_q= await db.update({timestamp: firebase.firestore.FieldValue.serverTimestamp()`})
 
        const update_query = await db.update({price: firebase.firestore.FieldValue.arrayUnion(price),code: firebase.firestore.FieldValue.arrayUnion(code),qty:firebase.firestore.FieldValue.arrayUnion(qty),order_total:firebase.firestore.FieldValue.arrayUnion(order_total)});
 
