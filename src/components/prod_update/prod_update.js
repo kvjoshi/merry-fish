@@ -11,11 +11,13 @@ const Prod_update = ({ Product })=>{
         let updata = {name: name , code: code , price: price};
         db.collection('prod_list').doc(Product.id).set(updata)
 
+
     }
 
     const onDelete = () => {
         const db = firebase.firestore()
         db.collection('prod_list').doc(Product.id).delete()
+        window.location.reload();
     }
 
     return (

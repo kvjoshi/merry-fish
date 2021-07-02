@@ -7,37 +7,22 @@ import Prod_update from "../prod_update/prod_update";
 import TableCompReact from "../tableComp/tableComp-react";
 import BasicTable from '../tableComp/tableComp-datatable'
 import EditingDemo from "../tableComp/table-ka"
-import {useCollectionOnce} from "react-firebase-hooks/firestore";
+import {useCollection} from "react-firebase-hooks/firestore";
 
 export default function Prod_list() {
     const { currentUser, logout } = useAuth()
-
-    // const [Product, setProduct] = useState([]);
     const [newProductName, setNewProductName] = useState();
     const [newProductPrice, setNewProductPrice] = useState();
     const [newProductCode, setNewProductCode] = useState();
 
 
     //this is react-firebase-hook works but have to async it somehow
-     const [Product, prod_loading, prod_error] = useCollectionOnce(
+     const [Product, prod_loading, prod_error] = useCollection(
         firebase.firestore().collection('prod_list'),
         {
             snapshotListenOptions: { includeMetadataChanges: true },
         }
     );
-
-    // console.log(value.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-
-
-    // this is custom firebase get data it works
-   /* useEffect(() => {
-        const fetchData = async () => {
-            const db = firebase.firestore();
-            const data = await db.collection("prod_list").get();
-            setProduct(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-        };
-        fetchData();
-    }, [Product]);*/
 
     useEffect(() => {
         console.log('0');
@@ -46,12 +31,11 @@ export default function Prod_list() {
     const onCreate = () => {
         const db = firebase.firestore();
         db.collection("prod_list").add({ name: newProductName , price: newProductPrice ,code: newProductCode  });
-        // db.collection("prod_list").add({ price: newProductPrice });
     };
 
     return (
         <>
-            <div>
+            <div className={'container'}>
                 <div className={'row'}>
                     <p>
                         <strong>UUID: {currentUser.uid} </strong>
@@ -76,19 +60,19 @@ export default function Prod_list() {
                         </ul>
                     </div>
 
-                <div className={'row p-2'}>
+                <div className={'row p-2 col-12'}>
                     <span>Ka-Table blank array</span>
                     {Product &&  <EditingDemo Product={Product}/> }
                 </div>
-                <div className={'row p-2'}>
+                <div className={'row p-2 col-12'}>
                     <span>react-table blank array</span>
 
-                    <TableCompReact  Product={Product}/>
+                    {Product && <TableCompReact  Product={Product}/>}
 
                 </div>
-                <div className={'row p-2'}>
+                <div className={'row p-2 col-12'}>
                     <span>react-data-table blank array</span>
-                    <BasicTable Product={Product} />
+                    {Product &&  <BasicTable Product={Product} />}
                 </div>
             </div>
         </>

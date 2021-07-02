@@ -13,14 +13,14 @@ const columns = [
         editable: true,
     },
     {
-        name: 'Director',
+        name: 'Price',
         selector: 'price',
         sortable: true,
         editable: true,
     },
     {
-        name: 'Year',
-        selector: 'id',
+        name: 'Prod ID',
+        selector: 'code',
         sortable: true,
     },
 ];
@@ -51,21 +51,10 @@ const EditableCell = ({ row, index, column, col, onChange }) => {
     return row[column.selector];
 };
 
-export default function BasicTable() {
+export default function BasicTable(Product) {
 
-    const [Product, setProduct] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            const db = firebase.firestore();
-            const data = await db.collection("prod_list").get();
-            setProduct(data.docs.map(doc => ({ ...doc.data()})));
-            console.log(Product)
-        };
-        fetchData();
-    }, []);
-
-
-    let data1=Product;
+    let data1 = Product.Product.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+    console.log(data1);
 
     const [innerData, setInnerData] = useState(data1);
     const [editingId, setEditingId] = useState('');

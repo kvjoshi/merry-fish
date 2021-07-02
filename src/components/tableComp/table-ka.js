@@ -17,19 +17,14 @@ import {useCollection, useCollectionOnce} from "react-firebase-hooks/firestore";
 function EditingDemo(Product) {
 
 
-
-
-
-
    let dataArray = Product.Product.docs.map(doc => ({ ...doc.data(), id: doc.id }));
    console.log(dataArray);
 
     const tablePropsInit = {
         columns: [
             {key: 'name', title: 'Name', dataType: DataType.String, style: {width: '30%'}},
-            {key: 'code', title: 'Code', dataType: DataType.String, style: {width: '40px'}},
+            {key: 'code', title: 'Code', dataType: DataType.String, style: {width: '30%'}},
             {key: 'price', title: 'Price', dataType: DataType.String, style: {width: '10%'}},
-
         ],
         format: ({column, value}) => {
             if (column.dataType === DataType.Date) {
@@ -45,18 +40,15 @@ function EditingDemo(Product) {
         rowKeyField: 'id',
     };
 
-
     const [tableProps, changeTableProps] = useState(tablePropsInit);
     const dispatch = (action) => {
         changeTableProps((prevState) => kaReducer(prevState, action));
     };
-
             return (
                 <Table
                     {...tableProps}
                     dispatch={dispatch}
                 />
-
             )
 }
 
