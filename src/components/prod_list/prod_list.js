@@ -61,18 +61,24 @@ export default function Prod_list() {
                     </div>
 
                 <div className={'row p-2 col-12'}>
-                    <span>Ka-Table blank array</span>
-                    {Product &&  <EditingDemo Product={Product}/> }
+                    <span>Ka-Table Working Array</span>
+                    {Product &&
+                    <EditingDemo Product={Product}/>
+                    }
                 </div>
                 <div className={'row p-2 col-12'}>
-                    <span>react-table blank array</span>
+                    <span>react-table Working Array</span>
 
-                    {Product && <TableCompReact  Product={Product}/>}
+                    {Product &&
+                    <TableCompReact  Product={Product}/>
+                    }
 
                 </div>
                 <div className={'row p-2 col-12'}>
-                    <span>react-data-table blank array</span>
-                    {Product &&  <BasicTable Product={Product} />}
+                    <span>react-data-table Working Array</span>
+                    {Product &&
+                    <BasicTable Product={Product} />
+                    }
                 </div>
             </div>
         </>

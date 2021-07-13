@@ -15,7 +15,7 @@ function PlaceOrder(props) {
         });
     const [prod, prod_loading, prod_error] = useCollectionDataOnce(firebase.firestore().collection('prod_list'),
         {
-            snapshotListenOptions: { includeMetadataChanges: true },
+            idField: true
         });
     const [user_oid, set_user_oid] = useState();
     const [price, setPrice] = useState();
@@ -47,7 +47,7 @@ function PlaceOrder(props) {
             <div>
                     <h5>Inside Cart Data:</h5>
                 {user_oid &&
-                < Cart user_oid={user_oid}></Cart>
+                <Cart user_oid={user_oid}></Cart>
                 }
             <div>
                 <h1>Place Order</h1>
@@ -55,7 +55,7 @@ function PlaceOrder(props) {
             <div>
                 <ul className={'w-100'}>
                     {prod && prod.map(prod => (
-                        <li key={prod.code} className={'mt-2'}>
+                        <li key={prod.true } className={'mt-2'}>
                             <span className={'col-4 p-2'}>Code: {prod.code}</span>
                             <span className={'col-4 p-2'}>Name: {prod.name}</span>
                             <span className={'col-4 p-2'}>Price: {prod.price}</span>
